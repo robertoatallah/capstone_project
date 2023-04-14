@@ -1,0 +1,21 @@
+"","Category","Term","Count","PValue"
+"3","CC","GO:0005886~plasma membrane",272,2.85940052440415e-13
+"4","CC","GO:0070062~extracellular exosome",139,3.50500144225035e-12
+"5","CC","GO:0016324~apical plasma membrane",43,2.82321549467074e-11
+"7","CC","GO:0016323~basolateral plasma membrane",33,1.10189805239432e-10
+"9","CC","GO:0005887~integral component of plasma membrane",97,3.22723797480229e-10
+"18","BP","GO:0006883~cellular sodium ion homeostasis",10,5.90998571526695e-08
+"24","BP","GO:0055075~potassium ion homeostasis",9,4.34846103479478e-07
+"25","BP","GO:0007588~excretion",10,7.31935526037974e-07
+"26","BP","GO:0009410~response to xenobiotic stimulus",27,8.45138468612154e-07
+"31","BP","GO:1902476~chloride transmembrane transport",16,3.15224234347677e-06
+"16","MF","GO:0005509~calcium ion binding",60,4.0016308863007e-08
+"21","MF","GO:0008201~heparin binding",24,1.33423262378997e-07
+"27","MF","GO:0005201~extracellular matrix structural constituent",20,8.88100755506465e-07
+"89","MF","GO:0004957~prostaglandin E receptor activity",4,0.000475402813899799
+"94","MF","GO:0020037~heme binding",16,0.000557613665676135
+"53","KEGG","hsa04978:Mineral absorption",12,3.07110547268301e-05
+"55","KEGG","hsa05200:Pathways in cancer",43,3.84016936401595e-05
+"74","KEGG","hsa03320:PPAR signaling pathway",12,0.000250879908947522
+"78","KEGG","hsa01100:Metabolic pathways",91,0.000290649640578363
+"97","KEGG","hsa04966:Collecting duct acid secretion",7,0.000705991979498007
