@@ -1,5 +1,5 @@
-setwd("~/Documents/capstone/rscripts/enrichement_analysis/")
-chart<-read.table("chart_4CBB66A493291681316993753.txt", sep="\t", header = TRUE)
+setwd("~/Documents/capstone/rscripts/")
+chart<-read.table("../files/chart_4CBB66A493291681316993753.txt", sep="\t", header = TRUE)
 cc <- chart[grep("^GOTERM_CC", chart$Category), ][1:5, ]
 bp <- chart[grep("^GOTERM_BP", chart$Category), ][1:5, ]
 mf <- chart[grep("^GOTERM_MF", chart$Category), ][1:5, ]
@@ -45,5 +45,5 @@ ggplot(enrichement, aes(x = Count, y = reorder(Term, Count), fill = Category)) +
   ylab("Row") +
   ggtitle("Enrichement Data by Row Name")
 
-write.csv(enrichement, "enrichement.csv")
+write.csv(enrichement, "../files/enrichement.csv")
   
