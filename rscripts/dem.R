@@ -47,6 +47,10 @@ sum(dem$condition== TRUE & dem$logFC < 0)
 dem <- subset(dem, dem$condition == TRUE)
 write.csv(dem, file="../files/dem_table.csv", row.names=FALSE)
 write.table(dem$miRNA_ID, file= "../files/dem_symbols.txt", row.names = FALSE, col.names = FALSE)
+#finding top 20 DEMs significant
+head_dem <- subset(head(dem, n=20), select= c("miRNA_ID","adj.P.Val","P.Value","logFC"))
+write.table(head_dem, file="../files/dem_table_head.csv", row.names=FALSE)
+
 # summarize test results 
 
 

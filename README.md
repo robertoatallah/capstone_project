@@ -74,7 +74,14 @@ write.table(deg$Gene.ID, file= "../files/DEG_IDs.txt", row.names = FALSE, col.na
 write.table(deg$Gene.symbol, file= "../files/DEG_symbols.txt", row.names = FALSE, col.names = FALSE)
 #REGEX to take long non coding RNA from the data
 write.table(grep("LINC.*", deg$Gene.symbol, value = TRUE), "../files/LNC.txt", row.names = FALSE, col.names = FALSE)
+#finding top 20 DEGs significant and top 6 LNC
+head_deg <- subset(head(deg, n=20), select= c("Gene.symbol","adj.P.Val","P.Value","logFC"))
 
+lnc <- deg[grep("LINC.*", deg$Gene.symbol), ]
+lnc_head <- subset(head(lnc, n=6), select= c("Gene.symbol","adj.P.Val","P.Value","logFC"))
+#writing to file
+write.table(head_deg, file="../files/DEG_table_head.csv", row.names=FALSE)
+write.table(lnc_head, file="../files/LNC_table_head.csv", row.names=FALSE)
 # volcano plot (log P-value vs log fold change)
 library(ggplot2)
 
@@ -145,6 +152,10 @@ sum(dem$condition== TRUE & dem$logFC < 0)
 dem <- subset(dem, dem$condition == TRUE)
 write.csv(dem, file="../files/dem_table.csv", row.names=FALSE)
 write.table(dem$miRNA_ID, file= "../files/dem_symbols.txt", row.names = FALSE, col.names = FALSE)
+#finding top 20 DEMs significant
+head_dem <- subset(head(dem, n=20), select= c("miRNA_ID","adj.P.Val","P.Value","logFC"))
+write.table(head_dem, file="../files/dem_table_head.csv", row.names=FALSE)
+
 # summarize test results 
 
 
@@ -179,3 +190,11 @@ According to the cut-off criteria mentioned above, volcano plots were obtained. 
 ![Figure 3: Volcano Plot for the DEmiRs samples; Blue points are the ones selected](figures/figure3.png){width="337"}
 
 ![Figure 4: Box Plot for the log2FC expression levels in the samples for the DEmiRs samples](figures/figure4.png){width="371"}
+
+### Tables
+
+![Table 1: Top 10 significant DEGs](table_figures/table1.png){width="287"}
+
+![Table 2: All DELncRNAs](table_figures/table2.png){width="286"}
+
+![Table 3: Top 10 significant DEMiRs](table_figures/table3.png){width="285"}

@@ -55,7 +55,14 @@ write.table(deg$Gene.ID, file= "../files/DEG_IDs.txt", row.names = FALSE, col.na
 write.table(deg$Gene.symbol, file= "../files/DEG_symbols.txt", row.names = FALSE, col.names = FALSE)
 #REGEX to take long non coding RNA from the data
 write.table(grep("LINC.*", deg$Gene.symbol, value = TRUE), "../files/LNC.txt", row.names = FALSE, col.names = FALSE)
+#finding top 20 DEGs significant and top 6 LNC
+head_deg <- subset(head(deg, n=20), select= c("Gene.symbol","adj.P.Val","P.Value","logFC"))
 
+lnc <- deg[grep("LINC.*", deg$Gene.symbol), ]
+lnc_head <- subset(head(lnc, n=6), select= c("Gene.symbol","adj.P.Val","P.Value","logFC"))
+#writing to file
+write.table(head_deg, file="../files/DEG_table_head.csv", row.names=FALSE)
+write.table(lnc_head, file="../files/LNC_table_head.csv", row.names=FALSE)
 # volcano plot (log P-value vs log fold change)
 library(ggplot2)
 
