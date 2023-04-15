@@ -127,3 +127,23 @@ for (i in 1:nrow(lncRNA_miRNA_filtered)) {
 cytoscape <- rbind(intersection_table, lncRNA_miRNA_filtered)
 write.table(cytoscape, "../files/cytoscape_to_import.csv", row.names = FALSE)
 intersection_table$regulation =="up" == TRUE
+
+write.table(unique(intersection_table$target), "../files/deg_intersection.txt", row.names = FALSE, col.names = FALSE)
+
+
+ppi_hub <- read.csv("../files/PPI_hub.csv", header = TRUE)
+cerna_hub <- read.csv("../files/ceRNA_hub.csv", header = TRUE)
+cerna_hub$name <- gsub('"', '', cerna_hub$name)
+result <- merge(ppi_hub, cerna_hub, by.x = "display.name", by.y = "name")
+result$display.name
+write.csv(ppi_hub$display.name, "../files/ppi_hub_genes.txt", row.names = FALSE, col.names = FALSE)
+write.csv(cerna_hub$name, "../files/cerna_hub_genes.txt", row.names = FALSE, col.names = FALSE)
+
+ppi_hub_genes <- readLines("../files/ppi_hub_genes.txt")
+cerna_hub_genes <- readLines("../files/cerna_hub_genes.txt")
+library(VennDiagram)
+venn.diagram(list(set1 = set1, set2 = set2), filename = "venn_diagram.png",
+             col = c("cornflowerblue", "green"), fill = c("cornflowerblue", "green"),
+             alpha = c(0.5, 0.5), label.col = c("white", "white"),
+             cex = 1.5, fontfamily = "Helvetica", cat.cex = 1.8,
+             margin = 0.05)
