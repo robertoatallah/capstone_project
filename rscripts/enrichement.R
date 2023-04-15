@@ -1,11 +1,14 @@
 setwd("~/Documents/capstone/rscripts/")
+load(dplyr)
+#This table was downloaded from DAVID database, and taking top 5 of each category by P value
+#PS the data of table is already ordered by P.value
 chart<-read.table("../files/chart_4CBB66A493291681316993753.txt", sep="\t", header = TRUE)
 cc <- chart[grep("^GOTERM_CC", chart$Category), ][1:5, ]
 bp <- chart[grep("^GOTERM_BP", chart$Category), ][1:5, ]
 mf <- chart[grep("^GOTERM_MF", chart$Category), ][1:5, ]
 kegg <- chart[grep("^KEGG", chart$Category), ][1:5, ]
 
-
+#Restructuring the tables
 cc <- cc %>% 
   mutate(Category = "CC") %>%
   select(Category, everything())
@@ -32,7 +35,7 @@ kegg <- kegg %>%
   select(Category, everything())
 
 kegg<-kegg[,c(1:3, 5)]
-
+#Binding all rows together
 enrichement<- rbind(cc, bp, mf, kegg)
 
 temp <- enrichement

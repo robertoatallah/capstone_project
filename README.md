@@ -198,3 +198,84 @@ According to the cut-off criteria mentioned above, volcano plots were obtained. 
 ![Table 2: All DELncRNAs](table_figures/table2.png){width="286"}
 
 ![Table 3: Top 10 significant DEMiRs](table_figures/table3.png){width="285"}
+
+## Gene Ontology and Pathway Analysis		
+
+### Materials & Methods
+
+The Database for Annotation, Visualization and Integrated Discovery (DAVID, [http://david.abcc.ncifcrf.gov/)](http://david.abcc.ncifcrf.gov/)) is a web resource that offers functional interpretation of plenty of genes derived from genomic researches. In present study, DAVID database was used to perform Gene Ontology (GO) and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analysis. The ontology contains three hierarchies: biological process (BP), cellular component (CC) and molecular function (MF). Pathway analysis is a functional analysis that maps genes to KEGG pathways. Herein, I performed GO analysis and KEGG pathway analysis using only the differentially expressed genes that I obtained. The P value denoted the significance of the GO and pathway term enrichment in the DEGs. "P value \<0.05" was set as the cut-off criterion. All of that was performed with an R script.
+
+### Results
+
+I found significant results in GO terms and KEGG pathways which will be displayed below. Most of them are related to functions in the kidney that might be affected by Renal Cell Carcinoma, like excretion, membrane transports, mineral absorption, etc\... Also we see notice that 43 genes are related in pathways in cancer in the KEGG pathways, and others are related to other metabolic pathways in kidney.
+
+### Table
+
+![Table 4: Top 5 significant GO Terms by Category and KEGG pathways](table_figures/table4.png){alt="Table 4: Top 5 significant GO Terms by Category and KEGG pathways" width="462"}
+
+### Figure
+
+![Figure 5: Display of the GO Terms and KEGG pathways by Count](figures/figure5.png)
+
+### Code
+
+``` R
+setwd("~/Documents/capstone/rscripts/")
+load(dplyr)
+#This table was downloaded from DAVID database, and taking top 5 of each category by P value
+#PS the data of table is already ordered by P.value
+chart<-read.table("../files/chart_4CBB66A493291681316993753.txt", sep="\t", header = TRUE)
+cc <- chart[grep("^GOTERM_CC", chart$Category), ][1:5, ]
+bp <- chart[grep("^GOTERM_BP", chart$Category), ][1:5, ]
+mf <- chart[grep("^GOTERM_MF", chart$Category), ][1:5, ]
+kegg <- chart[grep("^KEGG", chart$Category), ][1:5, ]
+
+#Restructuring the tables
+cc <- cc %>% 
+  mutate(Category = "CC") %>%
+  select(Category, everything())
+  
+cc<-cc[,c(1:3, 5)]
+
+
+bp <- bp %>% 
+  mutate(Category = "BP") %>%
+  select(Category, everything())
+
+bp<-bp[,c(1:3, 5)]
+
+
+mf <- mf %>% 
+  mutate(Category = "MF") %>%
+  select(Category, everything())
+
+mf<-mf[,c(1:3, 5)]
+
+
+kegg <- kegg %>% 
+  mutate(Category = "KEGG") %>%
+  select(Category, everything())
+
+kegg<-kegg[,c(1:3, 5)]
+#Binding all rows together
+enrichement<- rbind(cc, bp, mf, kegg)
+
+temp <- enrichement
+temp$Term <- substr(temp$Term, 1, 10)
+library(ggplot2)
+# create a bar plot of the enrichment data
+ggplot(enrichement, aes(x = Count, y = reorder(Term, Count), fill = Category)) +
+  geom_bar(stat = "identity") +
+  xlab("Count") +
+  ylab("Row") +
+  ggtitle("Enrichement Data by Row Name")
+
+write.csv(enrichement, "../files/enrichement.csv")
+  
+```
+
+				
+			
+		
+
+	
