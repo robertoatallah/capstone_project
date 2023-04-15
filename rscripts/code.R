@@ -1,20 +1,20 @@
-setwd("~/Documents/capstone/rscripts/code/")
-deg <- read.csv("../deg/DEG_table.csv")
-dem <- read.csv("../dem/dem_table.csv")
+setwd("~/Documents/capstone/rscripts/")
+deg <- read.csv("../files/DEG_table.csv")
+dem <- read.csv("../files/dem_table.csv")
 #Reading file of lncRNA miRNA interactions then taking predicted miRNA ids without duplicates
-lncmiR <- read.csv("lncRNA_miRNA.csv")
-write.table(unique(lncmiR$miRNA), "miRNA_predicted.txt", row.names = FALSE, col.names = FALSE)
-miRNA_predicted <- read.table("miRNA_predicted.txt")
+lncmiR <- read.csv("../files/lncRNA_miRNA.csv")
+write.table(unique(lncmiR$miRNA), "../files/miRNA_predicted.txt", row.names = FALSE, col.names = FALSE)
+miRNA_predicted <- read.table("../files/miRNA_predicted.txt")
 #Finding intersections of miRNA in DEM file and predicted ones
 miRNA_intersection <- intersect(dem$miRNA_ID, miRNA_predicted$V1)
-write.table(miRNA_intersection, "miRNA_intersection.txt", row.names = FALSE, col.names=FALSE)
+write.table(miRNA_intersection, "../files/miRNA_intersection.txt", row.names = FALSE, col.names=FALSE)
 #We got 3 miRNAs found in both DEM and predicted.
 #Now we want to find the genes that are targets to these three using 3 DB
-pred_mirDB <- read.csv("mirDB.csv")
-pred_mirTarBase <- read.csv("search_result-2.csv")
-target1<- read.csv("Copy of TargetScan8.0__miR-140-5p.predicted_targets.csv")
-target2 <- read.csv("Copy of TargetScan8.0__miR-28-5p_708-5p.predicted_targets.csv")
-target3 <- read.csv("Copy of TargetScan8.0__miR-532-5p.predicted_targets.csv")
+pred_mirDB <- read.csv("../files/mirDB.csv")
+pred_mirTarBase <- read.csv("../files/search_result-2.csv")
+target1<- read.csv("../files/Copy of TargetScan8.0__miR-140-5p.predicted_targets.csv")
+target2 <- read.csv("../files/Copy of TargetScan8.0__miR-28-5p_708-5p.predicted_targets.csv")
+target3 <- read.csv("../files/Copy of TargetScan8.0__miR-532-5p.predicted_targets.csv")
 target2 <- subset(target2, target2$Representative.miRNA == "hsa-miR-28-5p")
 
 target1 <- target1[, -9]
@@ -59,7 +59,7 @@ subset_table <- subset(combined_table, Sum >= 2)
 #genes intersection predicted vs DEGs
 subset_table_intersection <- subset(subset_table, subset_table[,2] %in% deg$Gene.symbol)
 array<- unique(subset_table_intersection$Target)
-write.table(unique(subset_table_intersection)$Target, "genes_intersection.txt", row.names = FALSE, col.names = FALSE)
+write.table(unique(subset_table_intersection)$Target, "../files/genes_intersection.txt", row.names = FALSE, col.names = FALSE)
 
 
 target_rows <- data.frame() # Create an empty data frame to store the target rows
@@ -69,7 +69,7 @@ for (target in array) {
 }
 
 # Print 
-write.table(target_rows, "target_rows.csv", row.names = FALSE)
+write.table(target_rows, "../files/target_rows.csv", row.names = FALSE)
 miRNA_values <- c("hsa-miR-140-5p", "hsa-miR-532-5p", "hsa-miR-28-5p")
 lncRNA_miRNA_filtered <- subset(lncmiR, miRNA %in% miRNA_values)
-write.table(lncRNA_miRNA_filtered, "lncRNA_miRNA_filtered.csv", row.names = FALSE)
+write.table(lncRNA_miRNA_filtered, "../files/lncRNA_miRNA_filtered.csv", row.names = FALSE)

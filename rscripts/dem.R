@@ -1,13 +1,13 @@
 #   Differential expression analysis with limma
-setwd("~/Documents/capstone/rscripts/deg/")
+setwd("~/Documents/capstone/rscripts/")
 library(GEOquery)
 library(limma)
 library(dplyr)
-library(umap)
+
 # load series and platform data from GEO
 
 gset <- getGEO("GSE16441", GSEMatrix =TRUE, AnnotGPL=TRUE)
-if (length(gset) > 1) idx <- grep("GPL6480", attr(gset, "names")) else idx <- 1
+if (length(gset) > 1) idx <- grep("GPL8659", attr(gset, "names")) else idx <- 1
 gset <- gset[[idx]]
 
 # make proper column names to match toptable 
@@ -36,30 +36,26 @@ fit2 <- contrasts.fit(fit, cont.matrix)
 fit2 <- eBayes(fit2, 0.01) 
 tT <- topTable(fit2, adjust="fdr", sort.by="B", number=Inf)
 
-tT <- subset(tT, select=c("ID","adj.P.Val","P.Value","t","B","logFC","Gene.symbol","Gene.title", "Gene.ID"))
+tT <- subset(tT, select=c("ID","adj.P.Val","P.Value","t","B","logFC","miRNA_ID","SPOT_ID"))
 
-#Take table and mutate it based on condition to extract DEGs
-deg <- tT %>%
-  mutate(condition = abs(logFC) > 2 & adj.P.Val < 0.05 & Gene.symbol != "")
+dem <- tT %>%
+  mutate(condition = abs(logFC) > 1 & adj.P.Val < 0.05)
 # summarize test results 
-sum(deg$condition == TRUE)
-sum(deg$condition== TRUE & deg$logFC > 0)
-sum(deg$condition== TRUE & deg$logFC < 0)
+sum(dem$condition == TRUE)
+sum(dem$condition== TRUE & dem$logFC > 0)
+sum(dem$condition== TRUE & dem$logFC < 0)
+dem <- subset(dem, dem$condition == TRUE)
+write.csv(dem, file="../files/dem_table.csv", row.names=FALSE)
+write.table(dem$miRNA_ID, file= "../files/dem_symbols.txt", row.names = FALSE, col.names = FALSE)
+# summarize test results 
 
-deg <- subset(deg, deg$condition == TRUE)
-
-write.csv(deg, file="DEG_table.csv", row.names=FALSE)
-write.table(deg$Gene.ID, file= "DEG_IDs.txt", row.names = FALSE, col.names = FALSE)
-write.table(deg$Gene.symbol, file= "DEG_symbols.txt", row.names = FALSE, col.names = FALSE)
-#REGEX to take long non coding RNA from the data
-write.table(grep("LINC.*", deg$Gene.symbol, value = TRUE), "LNC.txt", row.names = FALSE, col.names = FALSE)
 
 # volcano plot (log P-value vs log fold change)
-colnames(fit2) # list contrast names
-volcanoplot(fit2, coef=1, main=colnames(fit2)[1], pch=20)
-abline(v = -2, lty = 2, col="red") # Dashed line at x=-2
-abline(v = 2, lty = 2, col="red") # Dashed line at x=2
-abline(h = 1.3, lty = 2, col="red") 
+library(ggplot2)
+
+tT %>% 
+  mutate(Significant = adj.P.Val < 0.05 & abs(logFC) > 1) %>% 
+  ggplot(aes(x = logFC, y = -log10(adj.P.Val), col=Significant)) + geom_point()
 
 ex <- exprs(gset)
 
