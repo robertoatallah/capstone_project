@@ -79,3 +79,4 @@ par(mar=c(7,4,2,1))
 title <- paste ("GSE16441", "/", annotation(gset), sep ="")
 boxplot(ex[,ord], boxwex=0.6, notch=T, main=title, outline=FALSE, las=2, col=gs[ord])
 legend("topleft", groups, fill=palette(), bty="n")
+

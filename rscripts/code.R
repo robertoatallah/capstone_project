@@ -3,12 +3,13 @@ deg <- read.csv("../files/DEG_table.csv")
 dem <- read.csv("../files/dem_table.csv")
 #Reading file of lncRNA miRNA interactions then taking predicted miRNA ids without duplicates
 lncmiR <- read.csv("../files/lncRNA_miRNA.csv")
+
 write.table(unique(lncmiR$miRNA), "../files/miRNA_predicted.txt", row.names = FALSE, col.names = FALSE)
 miRNA_predicted <- read.table("../files/miRNA_predicted.txt")
 #Finding intersections of miRNA in DEM file and predicted ones
 miRNA_intersection <- intersect(dem$miRNA_ID, miRNA_predicted$V1)
 write.table(miRNA_intersection, "../files/miRNA_intersection.txt", row.names = FALSE, col.names=FALSE)
-#We got 3 miRNAs found in both DEM and predicted.
+#We got 3 miRNAs found in both DEM and predicted."hsa-miR-532-5p" "hsa-miR-140-5p"and "hsa-miR-28-5p"
 #Now we want to find the genes that are targets to these three using 3 DB
 pred_mirDB <- read.csv("../files/mirDB.csv")
 pred_mirTarBase <- read.csv("../files/search_result-2.csv")
@@ -55,7 +56,7 @@ combined_table$mirTarBase <- ifelse(paste(combined_table$Target, combined_table$
 #summing, then taking only ones with sum greater or equal than 2
 combined_table$Sum <- rowSums(combined_table[,3:5])
 subset_table <- subset(combined_table, Sum >= 2)
-
+temp <- subset(head(subset_table, n=20))
 #genes intersection predicted vs DEGs
 subset_table_intersection <- subset(subset_table, subset_table[,2] %in% deg$Gene.symbol)
 array<- unique(subset_table_intersection$Target)
@@ -67,9 +68,62 @@ for (target in array) {
   target_rows_subset <- subset(combined_table, Target == target)
   target_rows <- rbind(target_rows, target_rows_subset)
 }
+#MIRWalk Target of miRNA prediction
+#mirnet prediction
+mirnet_pred <- read.csv(file = "../files/miRWalk_miRNA_Targets-3.csv")
+mirnet_pred <- mirnet_pred[, c(1,3)]
+intersection_table <- subset(mirnet_pred, mirnet_pred[,2] %in% deg$Gene.symbol)
+#removing duplicate rows
+intersection_table <- distinct(intersection_table)
 
+write.csv(intersection_table, "../files/intersection_table_miRNA_mRNA.csv", row.names = FALSE)
+
+length(unique(intersection_table$genesymbol)) 
 # Print 
 write.table(target_rows, "../files/target_rows.csv", row.names = FALSE)
 miRNA_values <- c("hsa-miR-140-5p", "hsa-miR-532-5p", "hsa-miR-28-5p")
 lncRNA_miRNA_filtered <- subset(lncmiR, miRNA %in% miRNA_values)
 write.table(lncRNA_miRNA_filtered, "../files/lncRNA_miRNA_filtered.csv", row.names = FALSE)
+colnames(lncRNA_miRNA_filtered)[1:2] <- c("source", "target")
+colnames(intersection_table)[1:2] <- c("source", "target")
+
+deg_updated <- deg
+deg_updated$regulation <- ifelse(deg_updated$logFC > 0, "up", "down")
+dem_updated <- dem
+dem_updated$regulation <- ifelse(dem_updated$logFC > 0, "up", "down")
+#for loop to see if gene up or down regulated
+for (i in 1:nrow(intersection_table)) {
+
+  gene <- intersection_table[i, 2]
+  
+
+  match_row <- which(deg_updated$Gene.symbol == gene)
+  
+
+  if (length(match_row) > 0) {
+    regulation <- deg_updated[match_row[1], "regulation"]
+  } else {
+    regulation <- "NA"
+  }
+  
+  intersection_table[i, "regulation"] <- regulation
+}
+for (i in 1:nrow(lncRNA_miRNA_filtered)) {
+  
+  mirna <- lncRNA_miRNA_filtered[i, 2]
+  
+  
+  match_row <- which(dem_updated$miRNA_ID == mirna)
+  
+  
+  if (length(match_row) > 0) {
+    regulation <- dem_updated[match_row[1], "regulation"]
+  } else {
+    regulation <- "NA"
+  }
+  
+  lncRNA_miRNA_filtered[i, "regulation"] <- regulation
+}
+cytoscape <- rbind(intersection_table, lncRNA_miRNA_filtered)
+write.table(cytoscape, "../files/cytoscape_to_import.csv", row.names = FALSE)
+intersection_table$regulation =="up" == TRUE

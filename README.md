@@ -199,7 +199,7 @@ According to the cut-off criteria mentioned above, volcano plots were obtained. 
 
 ![Table 3: Top 10 significant DEMiRs](table_figures/table3.png){width="285"}
 
-## Gene Ontology and Pathway Analysis		
+## Gene Ontology and Pathway Analysis
 
 ### Materials & Methods
 
@@ -219,7 +219,7 @@ I found significant results in GO terms and KEGG pathways which will be displaye
 
 ### Code
 
-``` R
+``` r
 setwd("~/Documents/capstone/rscripts/")
 load(dplyr)
 #This table was downloaded from DAVID database, and taking top 5 of each category by P value
@@ -273,9 +273,3 @@ ggplot(enrichement, aes(x = Count, y = reorder(Term, Count), fill = Category)) +
 write.csv(enrichement, "../files/enrichement.csv")
   
 ```
-
-				
-			
-		
-
-	
