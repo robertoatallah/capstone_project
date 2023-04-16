@@ -16,14 +16,14 @@ write.table(miRNA_intersection, "../files/miRNA_intersection.txt", row.names = F
 mirwalk_pred <- read.csv(file = "../files/miRWalk_miRNA_Targets-3.csv")
 mirwalk_pred <- mirwalk_pred[, c(1,3)]
 intersection_table <- subset(mirwalk_pred, mirwalk_pred[,2] %in% deg$Gene.symbol)
-#removing duplicate rows
+#removing duplicate rows because some miRNA mRNA interactions are written multiple times (multiple binding sequences)
 intersection_table <- distinct(intersection_table)
 
 write.csv(intersection_table, "../files/intersection_table_miRNA_mRNA.csv", row.names = FALSE)
 
 length(unique(intersection_table$target)) 
 # Print 
-write.table(target_rows, "../files/target_rows.csv", row.names = FALSE)
+
 miRNA_values <- c("hsa-miR-140-5p", "hsa-miR-532-5p", "hsa-miR-28-5p")
 lncRNA_miRNA_filtered <- subset(lncmiR, miRNA %in% miRNA_values)
 write.table(lncRNA_miRNA_filtered, "../files/lncRNA_miRNA_filtered.csv", row.names = FALSE)
@@ -36,40 +36,28 @@ dem_updated <- dem
 dem_updated$regulation <- ifelse(dem_updated$logFC > 0, "up", "down")
 #for loop to see if gene up or down regulated
 for (i in 1:nrow(intersection_table)) {
-
   gene <- intersection_table[i, 2]
-  
-
   match_row <- which(deg_updated$Gene.symbol == gene)
-  
-
   if (length(match_row) > 0) {
     regulation <- deg_updated[match_row[1], "regulation"]
   } else {
     regulation <- "NA"
   }
-  
   intersection_table[i, "regulation"] <- regulation
 }
 for (i in 1:nrow(lncRNA_miRNA_filtered)) {
-  
   mirna <- lncRNA_miRNA_filtered[i, 2]
-  
-  
   match_row <- which(dem_updated$miRNA_ID == mirna)
-  
-  
   if (length(match_row) > 0) {
     regulation <- dem_updated[match_row[1], "regulation"]
   } else {
     regulation <- "NA"
   }
-  
   lncRNA_miRNA_filtered[i, "regulation"] <- regulation
 }
 cytoscape <- rbind(intersection_table, lncRNA_miRNA_filtered)
 write.table(cytoscape, "../files/cytoscape_to_import.csv", row.names = FALSE)
-intersection_table$regulation =="up" == TRUE
+
 
 write.table(unique(intersection_table$target), "../files/deg_intersection.txt", row.names = FALSE, col.names = FALSE)
 

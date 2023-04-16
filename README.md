@@ -297,7 +297,7 @@ I then intersected the predicted miRNAs with the DEmiRs found previously and obt
 
 ### Results
 
-From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualised in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: hsa-miR-28-5p that interacts with LINC00982; hsa-miR-532-5p that interacts with LINC00944 and hsa-miR-140-5p that interacts with LINC00473. \
+From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualised in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: hsa-miR-28-5p that interacts with LINC00982; hsa-miR-532-5p that interacts with LINC00944 and hsa-miR-140-5p that interacts with LINC00473.\
 Then using mirWalk database, these three miRNAs have been found to interact with 12,248 target mRNAs. By doing the intersection of these predicted mRNAs (which are gene targets) with the 880 differentially expressed mRNAs already found before, and I found 208 genes common between the two, these were the final DEmRNAs. 267 miRNA-mRNA interactions were selected (because 1 mRNA can be targeted by many miRNA), and combined with the lncRNA-miRNA interaction, I obtained the ceRNA network in figure 7.
 
 ### Code
@@ -332,7 +332,7 @@ The top 30 DEGs of ceRNA network acquired based on degree of connectivity using 
 
 ### Code
 
-``` R
+``` r
 setwd("~/Documents/capstone/rscripts/")
 deg <- read.csv("../files/DEG_table.csv")
 dem <- read.csv("../files/dem_table.csv")
@@ -351,14 +351,14 @@ write.table(miRNA_intersection, "../files/miRNA_intersection.txt", row.names = F
 mirwalk_pred <- read.csv(file = "../files/miRWalk_miRNA_Targets-3.csv")
 mirwalk_pred <- mirwalk_pred[, c(1,3)]
 intersection_table <- subset(mirwalk_pred, mirwalk_pred[,2] %in% deg$Gene.symbol)
-#removing duplicate rows
+#removing duplicate rows because some miRNA mRNA interactions are written multiple times (multiple binding sequences)
 intersection_table <- distinct(intersection_table)
 
 write.csv(intersection_table, "../files/intersection_table_miRNA_mRNA.csv", row.names = FALSE)
 
 length(unique(intersection_table$target)) 
 # Print 
-write.table(target_rows, "../files/target_rows.csv", row.names = FALSE)
+
 miRNA_values <- c("hsa-miR-140-5p", "hsa-miR-532-5p", "hsa-miR-28-5p")
 lncRNA_miRNA_filtered <- subset(lncmiR, miRNA %in% miRNA_values)
 write.table(lncRNA_miRNA_filtered, "../files/lncRNA_miRNA_filtered.csv", row.names = FALSE)
@@ -371,40 +371,28 @@ dem_updated <- dem
 dem_updated$regulation <- ifelse(dem_updated$logFC > 0, "up", "down")
 #for loop to see if gene up or down regulated
 for (i in 1:nrow(intersection_table)) {
-
   gene <- intersection_table[i, 2]
-  
-
   match_row <- which(deg_updated$Gene.symbol == gene)
-  
-
   if (length(match_row) > 0) {
     regulation <- deg_updated[match_row[1], "regulation"]
   } else {
     regulation <- "NA"
   }
-  
   intersection_table[i, "regulation"] <- regulation
 }
 for (i in 1:nrow(lncRNA_miRNA_filtered)) {
-  
   mirna <- lncRNA_miRNA_filtered[i, 2]
-  
-  
   match_row <- which(dem_updated$miRNA_ID == mirna)
-  
-  
   if (length(match_row) > 0) {
     regulation <- dem_updated[match_row[1], "regulation"]
   } else {
     regulation <- "NA"
   }
-  
   lncRNA_miRNA_filtered[i, "regulation"] <- regulation
 }
 cytoscape <- rbind(intersection_table, lncRNA_miRNA_filtered)
 write.table(cytoscape, "../files/cytoscape_to_import.csv", row.names = FALSE)
-intersection_table$regulation =="up" == TRUE
+
 
 write.table(unique(intersection_table$target), "../files/deg_intersection.txt", row.names = FALSE, col.names = FALSE)
 
@@ -425,7 +413,7 @@ Renal cell carcinoma (RCC) is a type of kidney cancer that is responsible for a 
 
 In a recent study, I investigated the ceRNA (competing endogenous RNA) network in RCC using bioinformatic analysis. Specifically, I focused on the interactions between lncRNAs, miRNAs, and mRNAs and how they contribute to the regulation of gene expression in RCC.
 
-The study identified several lncRNAs that interacted with miRNAs and mRNAs in the RCC ceRNA network, including LINC00473, LINC00944, and LINC00982, as well as miRNAs hsa-miR-140-5p, hsa-miR-28-5p, and hsa-miR-532-5p, which were found to interact with the genes RGMA, BSND, and THSD4.
+The study identified several lncRNAs that interacted with miRNAs and mRNAs in the RCC ceRNA network, including LINC00473 (down regulated), LINC00944 (up regulated), and LINC00982 (down regulated), as well as miRNAs hsa-miR-140-5p (up regulated), hsa-miR-28-5p (up regulated), and hsa-miR-532-5p (down regulated), which were found to interact with the genes RGMA (up regulated), BSND (down regulated), and THSD4 (down regulated).
 
 These results provide insights into the regulatory mechanisms underlying RCC development and progression. The ceRNA network provides a novel perspective on the regulation of gene expression, particularly with the identification of lncRNAs as important players in the process. Additionally, the study highlights the potential for targeting these lncRNAs, miRNAs, and mRNAs as a therapeutic strategy for RCC treatment.
 
