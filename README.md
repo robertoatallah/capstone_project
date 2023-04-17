@@ -14,6 +14,10 @@ Recently, competing endogenous RNA (ceRNA) networks have been proposed as a nove
 
 In this study, I aimed to comprehensively analyze the lncRNA-miRNA-mRNA ceRNA network in human RCC. I integrated data from multiple sources to construct a ceRNA network and performed functional enrichment analysis to identify key biological pathways and processes involved in RCC. Our findings may provide insights into the molecular mechanisms underlying RCC and potential therapeutic targets for this deadly disease.
 
+This is the flow diagram of the work that has been done.
+
+![](figures/Figure13.png)
+
 ## Microarray Data
 
 ### Materials & Methods
