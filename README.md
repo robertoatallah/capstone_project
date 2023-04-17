@@ -4,7 +4,7 @@
 
 # Capstone Project - Roberto Atallah
 
-# Integrated analysis of lncRNA-miRNA-mRNA ceRNA networkin human renal cell carcinoma
+# Integrated analysis of lncRNA-miRNA-mRNA ceRNA network in human renal cell carcinoma
 
 ## Introduction
 
@@ -24,7 +24,7 @@ One dataset was chosen by setting the screening criteria for the species type as
 
 ### Materials & Methods
 
-EGs Ire analyzed by R package "Linear Models for Microarray Data (**limma**)" function for datasets and "**GEOquery**" R package was used to retrieve to GSE from GEO database. Let me note that the data was already LOISS normalized and log2 transformed as indicated in the matrix file. For the GPL6480 platform (the total RNA one), **log Foldchange\>2 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DELs. For the GPL8659 platform samples (the micro-RNA one), l**og Foldchange\>1 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DElncRNAs. Statistical significance for the selection of this threshold was found, and those genes that Ire up- and down- regulated can also be selected for performing the subsequent analysis. R software was also used to draw volcano map of DELs, DEmiRs and DEmRNAs. This data would be used in the following ceRNA network construction and protein interaction network construction.
+DEGs are analyzed by R package "Linear Models for Microarray Data (**limma**)" function for datasets and "**GEOquery**" R package was used to retrieve to GSE from GEO database. Let me note that the data was already LOISS normalized and log2 transformed as indicated in the matrix file. For the GPL6480 platform (the total RNA one), **log Foldchange\>2 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DELs. For the GPL8659 platform samples (the micro-RNA one), l**og Foldchange\>1 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DElncRNAs. Statistical significance for the selection of this threshold was found, and those genes that Ire up- and down- regulated can also be selected for performing the subsequent analysis. R software was also used to draw volcano map of DELs, DEmiRs and DEmRNAs. This data would be used in the following ceRNA network construction and protein interaction network construction.
 
 ### Code
 
@@ -197,7 +197,7 @@ According to the cut-off criteria mentioned above, volcano plots Ire obtained. I
 
 ### Figures
 
-![Figure 1: Volcano Plot for the DEmRNAs samples; Blue points are the ones selected](figures/figure1.png){width="342"}
+![Figure 1: Volcano Plot for the DEmRNAs samples; Blue points are the ones selected](figures/figure1.png){width="339"}
 
 ![Figure 2: Box Plot for the log2FC expression levels in the samples for the DEmRNAs samples](figures/figure2.png){width="372"}
 
@@ -297,7 +297,7 @@ I then intersected the predicted miRNAs with the DEmiRs found previously and obt
 
 ### Results
 
-From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualised in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: hsa-miR-28-5p that interacts with LINC00982; hsa-miR-532-5p that interacts with LINC00944 and hsa-miR-140-5p that interacts with LINC00473.\
+From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualized in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: hsa-miR-28-5p that interacts with LINC00982; hsa-miR-532-5p that interacts with LINC00944 and hsa-miR-140-5p that interacts with LINC00473.\
 Then using mirWalk database, these three miRNAs have been found to interact with 12,248 target mRNAs. By doing the intersection of these predicted mRNAs (which are gene targets) with the 880 differentially expressed mRNAs already found before, and I found 208 genes common between the two, these were the final DEmRNAs. 267 miRNA-mRNA interactions were selected (because 1 mRNA can be targeted by many miRNA), and combined with the lncRNA-miRNA interaction, I obtained the ceRNA network in figure 7.
 
 ### Code
@@ -306,13 +306,13 @@ Then using mirWalk database, these three miRNAs have been found to interact with
 
 ![Figure 6: LncRNA-miRNA interactions predicted by DIANA lncBase. The triangle represents lncRNA and the quadrilateral represents miRNA.](figures/figure6.png){width="453"}
 
-![Figure 7: lncRNA-miRNA-mRNA ceRNA network. The triangle, lncRNA, the quadrilateral is miRNA, the oval is mRNA (red = up regulation, blue = down regulation)](figures/figure7.png)
+![Figure 7: lncRNA-miRNA-mRNA ceRNA network. The triangle, lncRNA, the quadrilateral is miRNA, the oval is mRNA (red = up regulation, blue = down regulation)](figures/figure7.png){width="703"}
 
 ## PPI network analysis and key gene indentification
 
 ### Materials & Methods
 
-The plug-in CytoHubba in Cytoscape software is a visualization software that obtains the dense relationship through the degree of connectivity. Those hub genes in ceRNA network were identified by CytoHubba. The present study adopted the Search Tool for the Retrieval of interacting Genes/Proteins (STRING; version 11.5) for retrieving protein interactions between the 208 DEGs found earlier. The PPI network was visualized using cytoscape then CytoHubba was used to identify the hub genes of PPI network. The key genes were determined by taking the intersection of hub genes in the ceRNA network and PPI network. They were used for follow-up analyis.
+The plug-in CytoHubba in Cytoscape software is a visualization software that obtains the dense relationship through the degree of connectivity. Those hub genes in ceRNA network were identified by CytoHubba. The present study adopted the Search Tool for the Retrieval of interacting Genes/Proteins (STRING; version 11.5) for retrieving protein interactions between the 208 DEGs found earlier. The PPI network was visualized using cytoscape then CytoHubba was used to identify the hub genes of PPI network. The key genes were determined by taking the intersection of hub genes in the ceRNA network and PPI network. They were used for follow-up analysis.
 
 ### Results
 
@@ -320,15 +320,15 @@ The top 30 DEGs of ceRNA network acquired based on degree of connectivity using 
 
 ### Figures
 
-![Figure 8: Relationship network diagram of hub genes of ceRNA network](figures/figure8.png)
+![Figure 8: Relationship network diagram of hub genes of ceRNA network](figures/figure8.png){width="446"}
 
-![Figure 9: PPI generated by STRING database](figures/figure9.png)
+![Figure 9: PPI generated by STRING database](figures/figure9.png){width="702"}
 
-![Figure 10: Hub genes from the STRING PPI network, top 30](figures/figure10.png)
+![Figure 10: Hub genes from the STRING PPI network, top 30](figures/figure10.png){width="444"}
 
-![Figure 11: Venn diagram of key genes](figures/figure11.png)
+![Figure 11: Venn diagram of key genes](figures/figure11.png){width="424"}
 
-![Figure 12: Key genes lncRNA-miRNA-mRNA interaction](figures/figure12.png)
+![Figure 12: Key genes lncRNA-miRNA-mRNA interaction](figures/figure12.png){width="421"}
 
 ### Code
 
