@@ -8,11 +8,11 @@
 
 ## Introduction
 
-Renal cell carcinoma (RCC) is the most common type of kidney cancer, accounting for approximately 90% of all kidney cancer cases. Despite advances in diagnosis and treatment, RCC still poses a significant health threat, with a 5-year survival rate of less than 10% for advanced stage disease. In recent years, non-coding RNAs (ncRNAs) have emerged as important regulators of gene expression and have been implicated in the pathogenesis of various cancers, including RCC. Among ncRNAs, long non-coding RNAs (lncRNAs) have garnered particular interest due to their involvement in numerous biological processes, such as cell differentiation, proliferation, and apoptosis. Furthermore, lncRNAs have been shown to play a critical role in the development and progression of RCC.
+Renal cell carcinoma (RCC) is the most common type of kidney cancer, accounting for approximately 90% of all kidney cancer cases (Hsieh et al., 2017). Despite advances in diagnosis and treatment, RCC still poses a significant health threat, with a 5-year survival rate of less than 10% for advanced stage disease (Hsieh et al., 2017). In recent years, non-coding RNAs (ncRNAs) have emerged as important regulators of gene expression and have been implicated in the pathogenesis of various cancers, including RCC (Slack & Chinnaiyan, 2019). Among ncRNAs, long non-coding RNAs (lncRNAs) have garnered particular interest due to their involvement in numerous biological processes, such as cell differentiation, proliferation, and apoptosis (Kung et al., 2013). Furthermore, lncRNAs are the ncRNAs that are over 200 bp in length and have been shown to play a critical role in the development and progression of RCC, thus they can be targeted for the treatment of the cancer (Haiyan et al., 2021).
 
-Recently, competing endogenous RNA (ceRNA) networks have been proposed as a novel regulatory mechanism involving lncRNAs, microRNAs (miRNAs), and messenger RNAs (mRNAs). In ceRNA networks, lncRNAs can act as sponges for miRNAs, thereby regulating the expression of downstream target mRNAs. Dysregulation of ceRNA networks has been implicated in various diseases, including cancer.
+Recently, competing endogenous RNA (ceRNA) networks have been proposed as a novel regulatory mechanism involving lncRNAs, microRNAs (miRNAs), and messenger RNAs (mRNAs) (Ala, 2020). In ceRNA networks, lncRNAs can act as sponges for miRNAs, thereby regulating the expression of downstream target mRNAs. Dysregulation of ceRNA networks has been implicated in various diseases, including cancer, like for example in the research conducted by (Shen et al., 2022) where the dysfunction of the ceRNA network of the tumor suppressor miR-637 led to clear cell renal cell carcinoma (ccRCC) development and prognosis.
 
-In this study, I aimed to comprehensively analyze the lncRNA-miRNA-mRNA ceRNA network in human RCC. I integrated data from multiple sources to construct a ceRNA network and performed functional enrichment analysis to identify key biological pathways and processes involved in RCC. Our findings may provide insights into the molecular mechanisms underlying RCC and potential therapeutic targets for this deadly disease.
+In this study, I aimed to comprehensively analyze the lncRNA-miRNA-mRNA ceRNA network in human RCC, by using bioinformatics analyses of public datasets. Firstly, this study applied Gene Expression Omnibus (GEO) database for obtaining the RCC-related lncRNA, mRNA and miRNA expression data. Therefore the DEGs (Differentially expressed genes), DEMs (Differentially expressed miRNAs) and DELs (Differentially expressed lncRNAs) were obtained. Then I used the DEGs to perform functional enrichment analysis to identify key biological pathways and processes involved in RCC. Cytoscape was further utilized to construct a lncRNA-miRNA-mRNA network, followed by the construction of a PPI network to finally come up with key genes expressed differently in RCC. The findings may provide insights into the molecular mechanisms underlying RCC and potential therapeutic targets for this deadly disease.
 
 This is the flow diagram of the work that has been done.
 
@@ -28,7 +28,7 @@ One dataset was chosen by setting the screening criteria for the species type as
 
 ### Materials & Methods
 
-DEGs are analyzed by R package "Linear Models for Microarray Data (**limma**)" function for datasets and "**GEOquery**" R package was used to retrieve to GSE from GEO database. Let me note that the data was already LOISS normalized and log2 transformed as indicated in the matrix file. For the GPL6480 platform (the total RNA one), **log Foldchange\>2 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DELs. For the GPL8659 platform samples (the micro-RNA one), l**og Foldchange\>1 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DElncRNAs. Statistical significance for the selection of this threshold was found, and those genes that Ire up- and down- regulated can also be selected for performing the subsequent analysis. R software was also used to draw volcano map of DELs, DEmiRs and DEmRNAs. This data would be used in the following ceRNA network construction and protein interaction network construction.
+DEGs are analyzed by R package "Linear Models for Microarray Data (**limma**)" (Ritchie et al., 2015) function for datasets and "**GEOquery**" R package was used to retrieve to GSE from GEO database. Let me note that the data was already LOISS normalized and log2 transformed as indicated in the matrix file. For the GPL6480 platform (the total RNA one), **log Foldchange\>2 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DELs. For the GPL8659 platform samples (the micro-RNA one), l**og Foldchange\>1 and adjust. p\<0.05** Ire regarded as threshold values for selecting DEGs and DElncRNAs. Statistical significance for the selection of this threshold was found, and those genes that Ire up- and down- regulated can also be selected for performing the subsequent analysis. R software was also used to draw volcano map of DELs, DEmiRs and DEmRNAs. This data would be used in the following ceRNA network construction and protein interaction network construction.
 
 ### Code
 
@@ -211,17 +211,17 @@ According to the cut-off criteria mentioned above, volcano plots Ire obtained. I
 
 ### Tables
 
-![Table 1: Top 10 significant DEGs](table_figures/table1.png){width="287"}
+![Table 1: Top 20 significant DEGs](table_figures/table1.png){width="287"}
 
 ![Table 2: All DELncRNAs](table_figures/table2.png){width="286"}
 
-![Table 3: Top 10 significant DEMiRs](table_figures/table3.png){width="285"}
+![Table 3: Top 20 significant DEMiRs](table_figures/table3.png){width="285"}
 
 ## Gene Ontology and Pathway Analysis
 
 ### Materials & Methods
 
-The Database for Annotation, Visualization and Integrated Discovery (DAVID, [http://david.abcc.ncifcrf.gov/)](http://david.abcc.ncifcrf.gov/)) is a resource that offers functional interpretation of plenty of genes derived from genomic researches. In present study, DAVID database was used to perform Gene Ontology (GO) and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analysis. The ontology contains three hierarchies: biological process (BP), cellular component (CC) and molecular function (MF). Pathway analysis is a functional analysis that maps genes to KEGG pathways. Herein, I performed GO analysis and KEGG pathway analysis using only the differentially expressed genes that I obtained. The P value denoted the significance of the GO and pathway term enrichment in the DEGs. "P value \<0.05" was set as the cut-off criterion. All of that was performed with an R script.
+The Database for Annotation, Visualization and Integrated Discovery (DAVID, [http://david.abcc.ncifcrf.gov/)](http://david.abcc.ncifcrf.gov/)) (Dennis et al., 2003) is a resource that offers functional interpretation of plenty of genes derived from genomic researches. In present study, DAVID database was used to perform Gene Ontology (GO) (Ashburner et al., 2000) and Kyoto Encyclopedia of Genes and Genomes (KEGG) pathway analysis (Kanehisa et al., 2019). The ontology contains three hierarchies: biological process (BP), cellular component (CC) and molecular function (MF). Pathway analysis is a functional analysis that maps genes to KEGG pathways. Herein, I performed GO analysis and KEGG pathway analysis using only the differentially expressed genes that I obtained. The P value denoted the significance of the GO and pathway term enrichment in the DEGs. "P value \<0.05" was set as the cut-off criterion. All of that was performed with an R script.
 
 ### Results
 
@@ -239,7 +239,7 @@ I found significant results in GO terms and KEGG pathways which will be displaye
 
 ``` r
 setwd("~/Documents/capstone/rscripts/")
-load(dplyr)
+library(dplyr)
 #This table was downloaded from DAVID database, and taking top 5 of each category by P value
 #PS the data of table is already ordered by P.value
 chart<-read.table("../files/chart_4CBB66A493291681316993753.txt", sep="\t", header = TRUE)
@@ -296,12 +296,12 @@ write.csv(enrichement, "../files/enrichement.csv")
 
 ### Materials & Methods
 
-Interaction between lncRNAs and miRNAs were predicted with **DIANA-LncBase v3, miRNA-lncRNA targets** (<https://diana.e-ce.uth.gr/lncbasev3/interactions>).\
-I then intersected the predicted miRNAs with the DEmiRs found previously and obtained miRNAs that I then used in the **mirWalk database**([http://mirwalk.umm.uniheidelberg.de/search_mirnas/](http://mirwalk.umm.uni-heidelberg.de/search_mirnas/)), which is a comprehensive database that provides predicted and validated miRNA binding sites of known genes of human, rat, cow, mouse, and dog. The predicted target genes found in this database search were intersected with my DEmRNAs to find final DEmRNAs. The final ceRNA network was visualized using cytoscape.
+Interaction between lncRNAs and miRNAs were taken from **DIANA-LncBase v3, miRNA-lncRNA targets** (<https://diana.e-ce.uth.gr/lncbasev3/interactions>) (Karagkouni et al., 2019). It is a reference repository with experimentally supported miRNA targets on non-coding transcripts. It catalogues approximately \~500,000 entries, corresponding to \~240,000 unique tissue and cell-type specific miRNA-lncRNA interactions. I chose only miRNA with high confidence level.\
+I then intersected the predicted miRNAs with the DEmiRs found previously and obtained final miRNAs that I then used in the **mirWalk database** ([http://mirwalk.umm.uniheidelberg.de/search_mirnas/](http://mirwalk.umm.uni-heidelberg.de/search_mirnas/)) (Sticht et al., 2018), which is a comprehensive database that provides predicted miRNA binding sites of known genes of human, rat, cow, mouse, and dog. The predicted target genes found in this database search were intersected with my DEmRNAs to find final DEmRNAs. The final ceRNA network was visualized using cytoscape.
 
 ### Results
 
-From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualized in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: hsa-miR-28-5p that interacts with LINC00982; hsa-miR-532-5p that interacts with LINC00944 and hsa-miR-140-5p that interacts with LINC00473.\
+From the six DElncRNAs, only four were found to interact with miRNAs by using the DIANA-LncBase database. These interactions which are a total 64 can be visualized in the figure 6. However 56 unique miRNA were predicted (1 miRNA may interact with many lncRNA), and by taking the intersection of these 56 miRNA with the DEmiRNAs already found before, we will find only three miRNAs interacting with three LncRNAs: LINC00982 interacts with hsa-miR-28-5p; hsa-miR-532-5p LINC00944 interacts with hsa-miR-532-5p and LINC00473 interacts with hsa-miR-140-5p.\
 Then using mirWalk database, these three miRNAs have been found to interact with 12,248 target mRNAs. By doing the intersection of these predicted mRNAs (which are gene targets) with the 880 differentially expressed mRNAs already found before, and I found 208 genes common between the two, these were the final DEmRNAs. 267 miRNA-mRNA interactions were selected (because 1 mRNA can be targeted by many miRNA), and combined with the lncRNA-miRNA interaction, I obtained the ceRNA network in figure 7.
 
 ### Code
@@ -337,6 +337,7 @@ The top 30 DEGs of ceRNA network acquired based on degree of connectivity using 
 ### Code
 
 ``` r
+library(dplyr)
 setwd("~/Documents/capstone/rscripts/")
 deg <- read.csv("../files/DEG_table.csv")
 dem <- read.csv("../files/dem_table.csv")
@@ -413,12 +414,50 @@ write.csv(cerna_hub$name, "../files/cerna_hub_genes.txt", row.names = FALSE, col
 
 ## Discussion
 
-Renal cell carcinoma (RCC) is a type of kidney cancer that is responsible for a significant number of cancer-related deaths worldwide. The dysregulation of various genes, including those involved in the regulation of metabolic pathways, membrane transport, and apoptosis, is known to contribute to the development and progression of RCC. In recent years, long non-coding RNAs (lncRNAs) have emerged as important regulators of gene expression and have been implicated in the pathogenesis of various cancers, including RCC.
+Renal cell carcinoma (RCC) is a type of kidney cancer that is responsible for a significant number of cancer-related deaths worldwide (Hsieh et al., 2017). The dysregulation of various genes, including those involved in the regulation of metabolic pathways, membrane transport, and apoptosis, is known to contribute to the development and progression of RCC. In recent years, long non-coding RNAs (lncRNAs) have emerged as important regulators of gene expression and have been implicated in the pathogenesis of various cancers, including RCC (Slack & Chinnaiyan, 2019).
 
 In a recent study, I investigated the ceRNA (competing endogenous RNA) network in RCC using bioinformatic analysis. Specifically, I focused on the interactions between lncRNAs, miRNAs, and mRNAs and how they contribute to the regulation of gene expression in RCC.
 
 The study identified several lncRNAs that interacted with miRNAs and mRNAs in the RCC ceRNA network, including LINC00473 (down regulated), LINC00944 (up regulated), and LINC00982 (down regulated), as well as miRNAs hsa-miR-140-5p (up regulated), hsa-miR-28-5p (up regulated), and hsa-miR-532-5p (down regulated), which were found to interact with the genes RGMA (up regulated), BSND (down regulated), and THSD4 (down regulated).
 
+This study is in-line with (Chen & Zheng, 2021) that provided clinicopathological and experimental evidence that lncRNA LINC00944 acts as an oncogene in RCC. Also according to (Li et al., 2021) LINC00473 have been found to play essential roles in the occurrence and development of multiple human cancers. Finally, LINC00982 has been found to regulate cell proliferation in gastric cancer (Fei et al., 2016), breast cancer (Chi et al., 2022), renal cancer (Zhang et al., 2019) and many others.
+
 These results provide insights into the regulatory mechanisms underlying RCC development and progression. The ceRNA network provides a novel perspective on the regulation of gene expression, particularly with the identification of lncRNAs as important players in the process. Additionally, the study highlights the potential for targeting these lncRNAs, miRNAs, and mRNAs as a therapeutic strategy for RCC treatment.
 
 However, it is important to note that these findings are based on bioinformatic analysis, and further experimental validation is required to confirm the interactions between these RNAs and genes in RCC. Nonetheless, the results provide a valuable starting point for further investigation into the mechanisms underlying RCC pathogenesis and the development of new therapeutic strategies for this disease.
+
+## References
+
+Ala, U. (2020). Competing Endogenous RNAs, Non-Coding RNAs and Diseases: An Intertwined Story. *Cells*, *9*(7), 1574. <https://doi.org/10.3390/cells9071574>
+
+Ashburner, M., Ball, C. G., Blake, J. B., Botstein, D., Butler, H., Cherry, J. M., Davis, A. P., Dolinski, K., Dwight, S. S., Eppig, J. T., Harris, M. P., Hill, D. J., Issel-Tarver, L., Kasarskis, A., Lewis, S. R., Matese, J. C., Richardson, J. D., Ringwald, M., Rubin, G. J., & Sherlock, G. (2000). Gene Ontology: tool for the unification of biology. *Nature Genetics*, *25*(1), 25--29. <https://doi.org/10.1038/75556>
+
+Chen, C., & Zheng, H. (2021). LncRNA LINC00944 Promotes Tumorigenesis but Suppresses Akt Phosphorylation in Renal Cell Carcinoma. *Frontiers in Molecular Biosciences*, *8*. <https://doi.org/10.3389/fmolb.2021.697962>
+
+Chi, F., Qiu, F., Jin, X., Chen, L. Q., He, G., & Han, S. (2022). LINC00982 Inhibits the Proliferation, Migration, and Invasion of Breast Cancer Cells Through the miR-765/DPF3 Axis. *DNA And Cell Biology*, *41*(4), 424--436. <https://doi.org/10.1089/dna.2021.0866>
+
+Dennis, G., Sherman, B., Hosack, D. A., Yang, J., Gao, W., Lane, H. C., & Lempicki, R. A. (2003). DAVID: Database for Annotation, Visualization, and Integrated Discovery. *Genome Biology*, *4*(9). <https://doi.org/10.1186/gb-2003-4-9-r60>
+
+Fei, Z., Yu, X., Zhou, M., Su, H., Zheng, Z., & Xie, C. (2016). Upregulated expression of long non-coding RNA LINC00982 regulates cell proliferation and its clinical relevance in patients with gastric cancer. *Tumor Biology*, *37*(2), 1983--1993. <https://doi.org/10.1007/s13277-015-3979-9>
+
+Haiyan, S., Luo, G., & Chen, Q. (2021). Long noncoding RNAs as tumorigenic factors and therapeutic targets for renal cell carcinoma. *Cancer Cell International*, *21*(1). <https://doi.org/10.1186/s12935-021-01805-2>
+
+Hsieh, J. J., Purdue, M. P., Signoretti, S., Swanton, C., Albiges, L., Schmidinger, M., Heng, D. Y., Larkin, J., & Ficarra, V. (2017). Renal cell carcinoma. *Nature Reviews Disease Primers*, *3*(1). <https://doi.org/10.1038/nrdp.2017.9>
+
+Kanehisa, M., Sato, Y., Furumichi, M., Morishima, K., & Tanabe, M. (2019). New approach for understanding genome variations in KEGG. *Nucleic Acids Research*, *47*(D1), D590--D595. <https://doi.org/10.1093/nar/gky962>
+
+Karagkouni, D., Paraskevopoulou, M. D., Tastsoglou, S., Skoufos, G., Karavangeli, A., Pierros, V., Zacharopoulou, E., & Hatzigeorgiou, A. G. (2019). DIANA-LncBase v3: indexing experimentally supported miRNA targets on non-coding transcripts. *Nucleic Acids Research*. <https://doi.org/10.1093/nar/gkz1036>
+
+Kung, J. T., Colognori, D., & Lee, J. T. (2013). Long Noncoding RNAs: Past, Present, and Future. *Genetics*, *193*(3), 651--669. <https://doi.org/10.1534/genetics.112.146704>
+
+Li, L., Zhang, X., Liu, N., Chen, X., & Peng, C. (2021). LINC00473: A novel oncogenic long noncoding RNA in human cancers. *Journal of Cellular Physiology*, *236*(6), 4174--4183. <https://doi.org/10.1002/jcp.30176>
+
+Ritchie, M. E., Phipson, B., Wu, D., Hu, Y., Law, C. W., Shi, W., & Smyth, G. K. (2015). limma powers differential expression analyses for RNA-sequencing and microarray studies. *Nucleic Acids Research*, *43*(7), e47. <https://doi.org/10.1093/nar/gkv007>
+
+Shen, J., Liang, C., Su, X., Wang, Q., Ke, Y., Fang, J., Zhang, D., & Duan, S. (2022). Dysfunction and ceRNA network of the tumor suppressor miR-637 in cancer development and prognosis. *Biomarker Research*, *10*(1). <https://doi.org/10.1186/s40364-022-00419-8>
+
+Slack, F. J., & Chinnaiyan, A. M. (2019). The Role of Non-coding RNAs in Oncology. *Cell*, *179*(5), 1033--1055. <https://doi.org/10.1016/j.cell.2019.10.017>
+
+Sticht, C., De La Torre, C., Parveen, A., & Gretz, N. (2018). miRWalk: An online resource for prediction of microRNA binding sites. *PLOS ONE*, *13*(10), e0206239. <https://doi.org/10.1371/journal.pone.0206239>
+
+Zhang, C., Li, X. Y., Luo, Z. Z., Wu, T. W., & Hu, H. (2019). Upregulation of LINC00982 inhibits cell proliferation and promotes cell apoptosis by regulating the activity of PI3K/AKT signaling pathway in renal cancer. *Eur Rev Med Pharmacol Sci*, *23*(4), 1443-1450.

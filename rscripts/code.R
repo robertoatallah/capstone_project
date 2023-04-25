@@ -1,3 +1,5 @@
+library(dplyr)
+
 setwd("~/Documents/capstone/rscripts/")
 deg <- read.csv("../files/DEG_table.csv")
 dem <- read.csv("../files/dem_table.csv")
