@@ -422,6 +422,15 @@ The study identified several lncRNAs that interacted with miRNAs and mRNAs in th
 
 This study is in-line with (Chen & Zheng, 2021) that provided clinicopathological and experimental evidence that lncRNA LINC00944 acts as an oncogene in RCC. Also according to (Li et al., 2021) LINC00473 have been found to play essential roles in the occurrence and development of multiple human cancers. Finally, LINC00982 has been found to regulate cell proliferation in gastric cancer (Fei et al., 2016), breast cancer (Chi et al., 2022), renal cancer (Zhang et al., 2019) and many others.
 
+Same for the miRNAs obtained was found to be dysregulated and involved in many types of cancers including RCC and others, for example (Flamini et al., 2017) studied the involvement of miR-140-5p in the case of lung cancer invasion, (Xu et al., 2017) found that miR‑28‑5p upregulation promoted the progression of ovarian cancer cell cycle, proliferation, migration and invasion. Finally, (Zhai et al., 2018) revealed that miR-532-5p was one of the most heavily downregulated miRNAs (we find it also here). Overexpression of miR-532-5p inhibited RCC cell proliferation, while knockdown of miR-532-5p promoted cell proliferation. 
+
+Considering the genes, The RGMA gene, also known as RGM domain family member A, is a gene that encodes the Repulsive Guidance Molecule A (RGMA) protein. RGMA plays a role in the development of the nervous system by providing guidance cues to growing axons and influencing their direction of growth. In addition to its role in axon guidance, RGMA has been implicated in other biological processes. It has been found to be involved in the regulation of cell migration, angiogenesis, and bone formation (Fujita & Yamashita, 2017). RGMA has been identified as a potential tumor suppressor in various types of cancer. Regarding its association with cancer, some studies have suggested that RGMA upregulation may have protumorigenic effects. For example, in colorectal cancer, RGMA upregulation has been associated with increased tumor growth, invasion, and metastasis. It has been proposed that the upregulated RGMA may disrupt the repulsive guidance cues and promote tumor cell migration and invasion. (Chan et al., 2008)
+
+Regarding the BSND gene, the downregulation of BSND leads to a dysfunctional or absent barttin protein. This disrupts the normal function of chloride channels in the kidneys and inner ear, resulting in the characteristic symptoms of the syndrome, such as salt wasting, renal tubular defects, and hearing loss.\
+Currently, there is no strong evidence linking BSND downregulation to the development or progression of renal cell carcinoma (RCC) or other types of cancer. However, it is worth noting that downregulation or altered expression of various genes, including those involved in ion transport and regulation, can be observed in cancer. These alterations can contribute to the dysregulation of cellular processes and potentially affect tumor development and progression.
+
+THSD4, also known as Thrombospondin Type-1 Domain-Containing Protein 4, is a protein that is involved in various biological processes, including angiogenesis, cell adhesion, and extracellular matrix organization. (Tan et al., 2022) showed that the expression levels of THSD4 were downregulated in bladder cancer tissues compared with normal tissues.
+
 These results provide insights into the regulatory mechanisms underlying RCC development and progression. The ceRNA network provides a novel perspective on the regulation of gene expression, particularly with the identification of lncRNAs as important players in the process. Additionally, the study highlights the potential for targeting these lncRNAs, miRNAs, and mRNAs as a therapeutic strategy for RCC treatment.
 
 However, it is important to note that these findings are based on bioinformatic analysis, and further experimental validation is required to confirm the interactions between these RNAs and genes in RCC. Nonetheless, the results provide a valuable starting point for further investigation into the mechanisms underlying RCC pathogenesis and the development of new therapeutic strategies for this disease.
@@ -432,13 +441,21 @@ Ala, U. (2020). Competing Endogenous RNAs, Non-Coding RNAs and Diseases: An Inte
 
 Ashburner, M., Ball, C. G., Blake, J. B., Botstein, D., Butler, H., Cherry, J. M., Davis, A. P., Dolinski, K., Dwight, S. S., Eppig, J. T., Harris, M. P., Hill, D. J., Issel-Tarver, L., Kasarskis, A., Lewis, S. R., Matese, J. C., Richardson, J. D., Ringwald, M., Rubin, G. J., & Sherlock, G. (2000). Gene Ontology: tool for the unification of biology. *Nature Genetics*, *25*(1), 25--29. <https://doi.org/10.1038/75556>
 
+Chan, S. S. M., Griffith, O. L., Tai, I. T., & Jones, S. J. (2008). Meta-analysis of Colorectal Cancer Gene Expression Profiling Studies Identifies Consistently Reported Candidate Biomarkers. *Cancer Epidemiology, Biomarkers & Prevention*, *17*(3), 543--552. <https://doi.org/10.1158/1055-9965.epi-07-2615>
+
 Chen, C., & Zheng, H. (2021). LncRNA LINC00944 Promotes Tumorigenesis but Suppresses Akt Phosphorylation in Renal Cell Carcinoma. *Frontiers in Molecular Biosciences*, *8*. <https://doi.org/10.3389/fmolb.2021.697962>
 
 Chi, F., Qiu, F., Jin, X., Chen, L. Q., He, G., & Han, S. (2022). LINC00982 Inhibits the Proliferation, Migration, and Invasion of Breast Cancer Cells Through the miR-765/DPF3 Axis. *DNA And Cell Biology*, *41*(4), 424--436. <https://doi.org/10.1089/dna.2021.0866>
 
 Dennis, G., Sherman, B., Hosack, D. A., Yang, J., Gao, W., Lane, H. C., & Lempicki, R. A. (2003). DAVID: Database for Annotation, Visualization, and Integrated Discovery. *Genome Biology*, *4*(9). <https://doi.org/10.1186/gb-2003-4-9-r60>
 
+Fan, L., Huang, X., Chen, J. M., Zhang, K., Gu, Y., Sun, J., & Cui, S. (2020). Long Noncoding RNA MALAT1 Contributes to Sorafenib Resistance by Targeting miR-140-5p/Aurora-A Signaling in Hepatocellular Carcinoma. *Molecular Cancer Therapeutics*, *19*(5), 1197--1209. <https://doi.org/10.1158/1535-7163.mct-19-0203>
+
 Fei, Z., Yu, X., Zhou, M., Su, H., Zheng, Z., & Xie, C. (2016). Upregulated expression of long non-coding RNA LINC00982 regulates cell proliferation and its clinical relevance in patients with gastric cancer. *Tumor Biology*, *37*(2), 1983--1993. <https://doi.org/10.1007/s13277-015-3979-9>
+
+Flamini, V., Jiang, W. G., & Cui, Y. (2017). Therapeutic Role of MiR-140-5p for the Treatment of Non-small Cell Lung Cancer. *Anticancer Research*, *37*(8). <https://doi.org/10.21873/anticanres.11825>
+
+Fujita, Y., & Yamashita, T. (2017). The roles of RGMa-neogenin signaling in inflammation and angiogenesis. *Inflammation and Regeneration*, *37*(1). <https://doi.org/10.1186/s41232-017-0037-6>
 
 Haiyan, S., Luo, G., & Chen, Q. (2021). Long noncoding RNAs as tumorigenic factors and therapeutic targets for renal cell carcinoma. *Cancer Cell International*, *21*(1). <https://doi.org/10.1186/s12935-021-01805-2>
 
@@ -459,5 +476,11 @@ Shen, J., Liang, C., Su, X., Wang, Q., Ke, Y., Fang, J., Zhang, D., & Duan, S. (
 Slack, F. J., & Chinnaiyan, A. M. (2019). The Role of Non-coding RNAs in Oncology. *Cell*, *179*(5), 1033--1055. <https://doi.org/10.1016/j.cell.2019.10.017>
 
 Sticht, C., De La Torre, C., Parveen, A., & Gretz, N. (2018). miRWalk: An online resource for prediction of microRNA binding sites. *PLOS ONE*, *13*(10), e0206239. <https://doi.org/10.1371/journal.pone.0206239>
+
+Tan, Z., Fu, S. H., Feng, R., Huang, Y., Li, N., Wang, H., & Wang, J. (2022). Identification of Potential Biomarkers for Progression and Prognosis of Bladder Cancer by Comprehensive Bioinformatics Analysis. *Journal of Oncology*, *2022*, 1--17. <https://doi.org/10.1155/2022/1802706>
+
+Xu, J., Jiang, N., Shi, H., Zhao, S., Yao, S., & Shen, H. (2017). miR-28-5p promotes the development and progression of ovarian cancer through inhibition of N4BP1. *International Journal of Oncology*, *50*(4), 1383--1391. <https://doi.org/10.3892/ijo.2017.3915>
+
+Zhai, W., Ma, J., Zhu, R., Xu, C., Zhang, J. Z., Chen, Y., Chen, Z., Gong, D., Zheng, J., Chen, C., Li, S., Li, B., Huang, Y., Xue, W., & Zheng, J. (2018). MiR-532-5p suppresses renal cancer cell proliferation by disrupting the ETS1-mediated positive feedback loop with the KRAS-NAP1L1/P-ERK axis. *British Journal of Cancer*, *119*(5), 591--604. <https://doi.org/10.1038/s41416-018-0196-5>
 
 Zhang, C., Li, X. Y., Luo, Z. Z., Wu, T. W., & Hu, H. (2019). Upregulation of LINC00982 inhibits cell proliferation and promotes cell apoptosis by regulating the activity of PI3K/AKT signaling pathway in renal cancer. *Eur Rev Med Pharmacol Sci*, *23*(4), 1443-1450.
