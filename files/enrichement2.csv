@@ -1,0 +1,21 @@
+"","Category","Term","Count","PValue"
+"1","CC","GO:0005886~plasma membrane",90,2.74595605282427e-08
+"6","CC","GO:0016021~integral component of membrane",81,3.06892450017348e-05
+"8","CC","GO:0016323~basolateral plasma membrane",11,0.000174057325935996
+"12","CC","GO:0030054~cell junction",10,0.000579422128706444
+"31","CC","GO:0005887~integral component of plasma membrane",26,0.00436113608124949
+"17","BP","GO:0055075~potassium ion homeostasis",4,0.00126833523478913
+"19","BP","GO:0070830~bicellular tight junction assembly",5,0.00159816331918595
+"22","BP","GO:0045944~positive regulation of transcription from RNA polymerase II promoter",24,0.00181433897741802
+"30","BP","GO:0002070~epithelial cell maturation",3,0.0041372940462609
+"34","BP","GO:0035725~sodium ion transmembrane transport",6,0.0050839567526748
+"10","MF","GO:0005496~steroid binding",5,0.000229423780558543
+"16","MF","GO:0001228~transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding",14,0.00118453341484719
+"21","MF","GO:0005509~calcium ion binding",18,0.00172893411595322
+"33","MF","GO:0005154~epidermal growth factor receptor binding",4,0.00488972829129382
+"71","MF","GO:0036122~BMP binding",3,0.0172749406488783
+"28","KEGG","hsa04530:Tight junction",8,0.00355806491234326
+"37","KEGG","hsa04974:Protein digestion and absorption",6,0.00701197814683411
+"43","KEGG","hsa00250:Alanine, aspartate and glutamate metabolism",4,0.00904442564690892
+"80","KEGG","hsa05200:Pathways in cancer",13,0.0205383536879084
+"91","KEGG","hsa04350:TGF-beta signaling pathway",5,0.024953509260323
